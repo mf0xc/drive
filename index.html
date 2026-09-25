@@ -145,7 +145,7 @@ function rawUrl(filePath){
 async function loadDir(dir){
   list.innerHTML = '<div class="empty">جاري التحميل...</div>';
   try{
-    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${dir}?ref=${BRANCH}`;
+    const url = `https://github.com/mf0xc/drive${GITHUB_USER}/${GITHUB_REPO}/contents/${dir}?ref=${BRANCH}`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('تعذر الوصول إلى المجلد');
     const data = await res.json();
