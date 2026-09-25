@@ -104,12 +104,9 @@
 </div>
 
 <script>
-/* ═══ الإعدادات الثابتة والصحيحة ═══ */
-const GITHUB_USER = "mf0xc";
-const GITHUB_REPO = "drive";
-const FOLDER      = "files";
-const BRANCH      = "main";
-/* ═════════════════════════════════ */
+/* ═══ الإعدادات المباشرة ═══ */
+const FOLDER = "files";
+/* ══════════════════════════ */
 
 const list    = document.getElementById('list');
 const pathEl  = document.getElementById('path');
@@ -139,14 +136,15 @@ function formatSize(b){
 }
 
 function rawUrl(filePath){
-  return "https://githubusercontent.com" + GITHUB_USER + "/" + GITHUB_REPO + "/" + BRANCH + "/" + filePath.split('/').map(encodeURIComponent).join('/');
+  // رابط مباشر لعرض محتوى ملفات الحساب المستهدف
+  return "https://githubusercontent.com" + filePath.split('/').map(encodeURIComponent).join('/');
 }
 
 async function loadDir(dir){
   list.innerHTML = '<div class="empty">جاري التحميل...</div>';
   try {
-    // تم هنا كتابة رابط الـ API الصافي والكامل لتجنب مشاكل دمج النصوص
-    const url = "https://github.com" + GITHUB_USER + "/" + GITHUB_REPO + "/contents/" + dir + "?ref=" + BRANCH;
+    // تم استبدال الرابط برابط مباشر وصريح بالكامل لـ API الخاص بجيتهاب
+    const url = "https://github.com" + dir + "?ref=main";
     const res = await fetch(url);
     if(!res.ok) throw new Error('تعذر الوصول إلى المجلد');
     const data = await res.json();
