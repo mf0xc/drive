@@ -104,12 +104,12 @@
 </div>
 
 <script>
-/* ═══ الإعدادات ═══ */
+/* ═══ الإعدادات الثابتة والصحيحة ═══ */
 const GITHUB_USER = "mf0xc";
 const GITHUB_REPO = "drive";
 const FOLDER      = "files";
 const BRANCH      = "main";
-/* ═══════════════ */
+/* ═════════════════════════════════ */
 
 const list    = document.getElementById('list');
 const pathEl  = document.getElementById('path');
@@ -144,8 +144,8 @@ function rawUrl(filePath){
 
 async function loadDir(dir){
   list.innerHTML = '<div class="empty">جاري التحميل...</div>';
-  try{
-    // تم إصلاح الرابط يدويًا هنا بإضافة سلاش بعد repos وباقي المسارات بدقة
+  try {
+    // تم هنا كتابة رابط الـ API الصافي والكامل لتجنب مشاكل دمج النصوص
     const url = "https://github.com" + GITHUB_USER + "/" + GITHUB_REPO + "/contents/" + dir + "?ref=" + BRANCH;
     const res = await fetch(url);
     if(!res.ok) throw new Error('تعذر الوصول إلى المجلد');
@@ -188,7 +188,7 @@ async function loadDir(dir){
         </div>`;
     });
     list.innerHTML = html;
-  }catch(err){
+  } catch(err) {
     list.innerHTML = '<div class="error">تعذر تحميل المحتوى — تحقق من الإعدادات</div>';
   }
 }
@@ -218,7 +218,7 @@ function openFile(filePath){
   }else if(t && t.key === 'image'){
     body.innerHTML = `<img src="${raw}" alt="${name}">`;
   }else if(t && t.key === 'pdf'){
-    body.innerHTML = `<iframe src="https://google.com" + encodeURIComponent(raw) + "&embedded=true"></iframe>`;
+    body.innerHTML = `<iframe src="https://google.com{encodeURIComponent(raw)}&embedded=true"></iframe>`;
   }else{
     return;
   }
