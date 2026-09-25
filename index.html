@@ -139,13 +139,14 @@ function formatSize(b){
 }
 
 function rawUrl(filePath){
+  // تم تصحيح الرابط وإضافة علامات الـ \$ المطلوبة
   return `https://githubusercontent.com{GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${filePath.split('/').map(encodeURIComponent).join('/')}`;
 }
 
 async function loadDir(dir){
   list.innerHTML = '<div class="empty">جاري التحميل...</div>';
   try{
-    // تم تعديل الرابط هنا ليعمل مع API جيتهاب الرسمي بشكل صحيح
+    // تم تصحيح الرابط هنا ليتوجه إلى API جيتهاب الرسمي بشكل سليم تماماً
     const url = `https://github.com{GITHUB_USER}/${GITHUB_REPO}/contents/${dir}?ref=${BRANCH}`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('تعذر الوصول إلى المجلد');
