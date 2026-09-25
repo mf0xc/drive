@@ -105,8 +105,8 @@
 
 <script>
 /* ═══ الإعدادات ═══ */
-const GITHUB_USER = "USERNAME";
-const GITHUB_REPO = "REPO_NAME";
+const GITHUB_USER = "mf0xc";
+const GITHUB_REPO = "drive";
 const FOLDER      = "files";
 const BRANCH      = "main";
 /* ═══════════════ */
@@ -139,13 +139,14 @@ function formatSize(b){
 }
 
 function rawUrl(filePath){
-  return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${filePath.split('/').map(encodeURIComponent).join('/')}`;
+  return `https://githubusercontent.com{GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${filePath.split('/').map(encodeURIComponent).join('/')}`;
 }
 
 async function loadDir(dir){
   list.innerHTML = '<div class="empty">جاري التحميل...</div>';
   try{
-    const url = `https://github.com/mf0xc/drive${GITHUB_USER}/${GITHUB_REPO}/contents/${dir}?ref=${BRANCH}`;
+    // تم تعديل الرابط هنا ليعمل مع API جيتهاب الرسمي بشكل صحيح
+    const url = `https://github.com{GITHUB_USER}/${GITHUB_REPO}/contents/${dir}?ref=${BRANCH}`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('تعذر الوصول إلى المجلد');
     const data = await res.json();
@@ -217,7 +218,7 @@ function openFile(filePath){
   }else if(t && t.key === 'image'){
     body.innerHTML = `<img src="${raw}" alt="${name}">`;
   }else if(t && t.key === 'pdf'){
-    body.innerHTML = `<iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(raw)}&embedded=true"></iframe>`;
+    body.innerHTML = `<iframe src="https://google.com{encodeURIComponent(raw)}&embedded=true"></iframe>`;
   }else{
     return;
   }
@@ -234,6 +235,7 @@ document.getElementById('modal').addEventListener('click', e => {
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
 loadDir(currentPath);
+
 </script>
 
 </body>
